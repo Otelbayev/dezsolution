@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Yandex uchun asosiy domen
+Host: https://dezsolution.uz
+
+Sitemap: https://dezsolution.uz/sitemap.xml

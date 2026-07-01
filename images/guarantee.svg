@@ -1,0 +1,11 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kafolat">
+  <defs>
+    <linearGradient id="gShield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#12a06e"/>
+      <stop offset="1" stop-color="#0a7350"/>
+    </linearGradient>
+  </defs>
+  <path d="M60 8 C60 8 86 22 112 22 C112 22 118 88 60 112 C2 88 8 22 8 22 C34 22 60 8 60 8 Z" fill="url(#gShield)"/>
+  <circle cx="60" cy="54" r="26" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.35"/>
+  <path d="M44 55 l10 10 l20 -24" stroke="#ffffff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
