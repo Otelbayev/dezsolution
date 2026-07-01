@@ -1,0 +1,12 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Дезинсекция">
+  <rect width="64" height="64" rx="14" fill="#e9f6f0"/>
+  <g stroke="#0c8c5e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <ellipse cx="32" cy="34" rx="9" ry="13"/>
+    <path d="M32 21v-4"/>
+    <circle cx="32" cy="14.5" r="2.4" fill="#0c8c5e"/>
+    <path d="M28 17l-3-4M36 17l3-4"/>
+    <path d="M23 27l-8-4M23 34h-9M23 41l-8 4"/>
+    <path d="M41 27l8-4M41 34h9M41 41l8 4"/>
+    <path d="M32 27h0M32 34h0M32 41h0"/>
+  </g>
+</svg>

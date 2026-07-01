@@ -27,7 +27,7 @@
   <meta property="og:description" content="Избавьтесь от тараканов, клопов и крыс на 100%. Без запаха, безопасно, гарантия 1 год, выезд за 60 минут." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dezsolution.uz/" />
-  <meta property="og:image" content="https://dezsolution.uz/exports/dezsolution-avatar.png" />
+  <meta property="og:image" content="https://dezsolution.uz/assets/dezsolution-avatar.png" />
   <meta property="og:locale" content="ru_RU" />
   <meta property="og:locale:alternate" content="uz_UZ" />
 
@@ -35,18 +35,18 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Дезинфекция в Ташкенте №1 — DezSolution" />
   <meta name="twitter:description" content="Тараканы, клопы, крысы — уничтожаем на 100%. Без запаха, гарантия 1 год." />
-  <meta name="twitter:image" content="https://dezsolution.uz/exports/dezsolution-avatar.png" />
+  <meta name="twitter:image" content="https://dezsolution.uz/assets/dezsolution-avatar.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon.png" />
-  <link rel="apple-touch-icon" href="exports/dezsolution-icon.png" />
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/dezsolution-icon.png" />
   <link rel="stylesheet" href="css/styles.css" />
 
   <!-- LCP tezligi: hero foni va logotipni oldindan yuklash -->
-  <link rel="preload" as="image" href="images/hero-bg.jpg" fetchpriority="high" />
-  <link rel="preload" as="image" href="exports/dezsolution-logo-primary.png" />
+  <link rel="preload" as="image" href="assets/hero-bg.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/dezsolution-logo-primary.png" />
 
   <!-- Google Ads / gtag joyi (o'z ID'ingizni qo'ying)
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
@@ -68,8 +68,8 @@
     "alternateName": "ДезСолюшн — дезинфекция Ташкент",
     "description": "Профессиональная служба дезинфекции, дезинсекции и дератизации в Ташкенте. Уничтожение тараканов, клопов, крыс и насекомых с гарантией 1 год.",
     "url": "https://dezsolution.uz/",
-    "logo": "https://dezsolution.uz/exports/dezsolution-logo-primary.png",
-    "image": "https://dezsolution.uz/exports/dezsolution-avatar.png",
+    "logo": "https://dezsolution.uz/assets/dezsolution-logo-primary.png",
+    "image": "https://dezsolution.uz/assets/dezsolution-avatar.png",
     "telephone": "+998901234567",
     "email": "info@dezsolution.uz",
     "priceRange": "$$",
@@ -168,15 +168,17 @@
   <header class="nav" id="top">
     <div class="container nav__inner">
       <a href="#top" class="logo" aria-label="DezSolution">
-        <img src="exports/dezsolution-logo-primary.png" alt="DezSolution" class="logo__img" width="154" height="38" decoding="async" fetchpriority="high" />
+        <img src="assets/dezsolution-logo-primary.png" alt="DezSolution" class="logo__img" width="154" height="38" decoding="async" fetchpriority="high" />
       </a>
 
-      <nav class="nav__links" aria-label="menu">
+      <nav class="nav__links" id="nav-menu" aria-label="menu">
         <a href="#services" data-i18n="nav.services">Услуги</a>
         <a href="#why" data-i18n="nav.why">Почему мы</a>
         <a href="#process" data-i18n="nav.process">Как работаем</a>
         <a href="#reviews" data-i18n="nav.reviews">Отзывы</a>
         <a href="#faq" data-i18n="nav.faq">Вопросы</a>
+        <a href="tel:+998901234567" class="nav__links-phone">+998 90 123 45 67</a>
+        <a href="#lead" class="btn-primary btn-primary--block nav__links-cta" data-i18n="nav.cta">Бесплатный вызов</a>
       </nav>
 
       <div class="nav__actions">
@@ -185,7 +187,10 @@
           <button type="button" class="lang-switch__btn" data-lang="uz">UZ</button>
         </div>
         <a href="tel:+998901234567" class="btn-ghost nav__phone">+998 90 123 45 67</a>
-        <a href="#lead" class="btn-primary" data-i18n="nav.cta">Бесплатный вызов</a>
+        <a href="#lead" class="btn-primary nav__cta" data-i18n="nav.cta">Бесплатный вызов</a>
+        <button type="button" class="nav__toggle js-nav-toggle" aria-label="Меню" aria-controls="nav-menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </header>
@@ -203,7 +208,7 @@
         <form class="lead-form lead-form--hero js-lead" data-source="hero">
           <div class="phone-field">
             <span class="phone-field__code">+998</span>
-            <input type="tel" name="phone" class="phone-field__input" inputmode="numeric" autocomplete="tel" placeholder="90 123 45 67" aria-label="phone" required />
+            <input type="tel" name="phone" class="phone-field__input" inputmode="numeric" autocomplete="tel" placeholder="90-123-45-67" aria-label="phone" required />
             <button type="submit" class="phone-field__submit" aria-label="OK">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -258,22 +263,22 @@
 
       <div class="grid grid--services">
         <article class="service-card reveal">
-          <div class="service-card__icon" aria-hidden="true">🦟</div>
+          <img src="assets/service-insects.svg" alt="" class="service-card__icon" width="64" height="64" loading="lazy" decoding="async" />
           <h3 class="service-card__title" data-i18n="services.s1.t">Дезинсекция</h3>
           <p class="service-card__text" data-i18n="services.s1.d">Полное уничтожение тараканов, муравьёв, клопов, блох и других насекомых.</p>
         </article>
         <article class="service-card reveal">
-          <div class="service-card__icon" aria-hidden="true">🐀</div>
+          <img src="assets/service-rodents.svg" alt="" class="service-card__icon" width="64" height="64" loading="lazy" decoding="async" />
           <h3 class="service-card__title" data-i18n="services.s2.t">Дератизация</h3>
           <p class="service-card__text" data-i18n="services.s2.d">Безопасные и эффективные методы борьбы с крысами и мышами.</p>
         </article>
         <article class="service-card reveal">
-          <div class="service-card__icon" aria-hidden="true">🦠</div>
+          <img src="assets/service-disinfect.svg" alt="" class="service-card__icon" width="64" height="64" loading="lazy" decoding="async" />
           <h3 class="service-card__title" data-i18n="services.s3.t">Дезинфекция</h3>
           <p class="service-card__text" data-i18n="services.s3.d">Полная санитарная обработка от вирусов, бактерий и грибка.</p>
         </article>
         <article class="service-card reveal">
-          <div class="service-card__icon" aria-hidden="true">🌫️</div>
+          <img src="assets/service-fumigation.svg" alt="" class="service-card__icon" width="64" height="64" loading="lazy" decoding="async" />
           <h3 class="service-card__title" data-i18n="services.s4.t">Фумигация</h3>
           <p class="service-card__text" data-i18n="services.s4.d">Газовая обработка складов и зерновой продукции для защиты.</p>
         </article>
@@ -285,7 +290,7 @@
   <section class="section section--tint" id="why">
     <div class="container why__inner">
       <div class="why__media reveal">
-        <img src="images/why.svg" alt="Специалист за работой" class="why__img" width="520" height="440" loading="lazy" decoding="async" />
+        <img src="assets/why.svg" alt="Специалист за работой" class="why__img" width="520" height="440" loading="lazy" decoding="async" />
       </div>
       <div class="why__body">
         <p class="eyebrow reveal" data-i18n="why.eyebrow">Почему DezSolution</p>
@@ -330,7 +335,7 @@
           <li data-i18n="band.li3">✓ Приедем в удобное время</li>
         </ul>
         <div class="band__guarantee">
-          <img src="images/guarantee.svg" alt="" width="56" height="56" loading="lazy" decoding="async" />
+          <img src="assets/guarantee.svg" alt="" width="56" height="56" loading="lazy" decoding="async" />
           <span data-i18n="band.guarantee">Даём письменную гарантию на 1 год</span>
         </div>
       </div>
@@ -348,7 +353,7 @@
             <span class="field__label" data-i18n="band.form.phone">Телефон *</span>
             <div class="phone-field phone-field--plain">
               <span class="phone-field__code">+998</span>
-              <input type="tel" name="phone" class="phone-field__input" inputmode="numeric" autocomplete="tel" placeholder="90 123 45 67" required />
+              <input type="tel" name="phone" class="phone-field__input" inputmode="numeric" autocomplete="tel" placeholder="90-123-45-67" required />
             </div>
           </label>
 
@@ -396,17 +401,17 @@
         <article class="review-card reveal">
           <p class="review-card__stars">★★★★★</p>
           <p class="review-card__text" data-i18n="reviews.r1.t">«В ресторане были тараканы. Обработали один раз — уже несколько месяцев ни одного. Спасибо!»</p>
-          <div class="review-card__author"><img src="images/avatar1.svg" alt="" width="40" height="40" loading="lazy" decoding="async" /><span data-i18n="reviews.r1.a">Дилноза — Чиланзар, кафе</span></div>
+          <div class="review-card__author"><img src="assets/avatar1.svg" alt="" width="40" height="40" loading="lazy" decoding="async" /><span data-i18n="reviews.r1.a">Дилноза — Чиланзар, кафе</span></div>
         </article>
         <article class="review-card reveal">
           <p class="review-card__stars">★★★★★</p>
           <p class="review-card__text" data-i18n="reviews.r2.t">«Приехали быстро, запаха нет. За детей не переживала. И цена приятная.»</p>
-          <div class="review-card__author"><img src="images/avatar2.svg" alt="" width="40" height="40" loading="lazy" decoding="async" /><span data-i18n="reviews.r2.a">Сардор — Юнусабад</span></div>
+          <div class="review-card__author"><img src="assets/avatar2.svg" alt="" width="40" height="40" loading="lazy" decoding="async" /><span data-i18n="reviews.r2.a">Сардор — Юнусабад</span></div>
         </article>
         <article class="review-card reveal">
           <p class="review-card__stars">★★★★★</p>
           <p class="review-card__text" data-i18n="reviews.r3.t">«Избавились от крыс на складе. Профессиональный подход, дали гарантию. Рекомендую.»</p>
-          <div class="review-card__author"><img src="images/avatar3.svg" alt="" width="40" height="40" loading="lazy" decoding="async" /><span data-i18n="reviews.r3.a">Жамшид — Сергели, склад</span></div>
+          <div class="review-card__author"><img src="assets/avatar3.svg" alt="" width="40" height="40" loading="lazy" decoding="async" /><span data-i18n="reviews.r3.a">Жамшид — Сергели, склад</span></div>
         </article>
       </div>
     </div>
@@ -454,7 +459,7 @@
       <form class="lead-form lead-form--hero js-lead" data-source="footer-cta">
         <div class="phone-field">
           <span class="phone-field__code">+998</span>
-          <input type="tel" name="phone" class="phone-field__input" inputmode="numeric" autocomplete="tel" placeholder="90 123 45 67" aria-label="phone" required />
+          <input type="tel" name="phone" class="phone-field__input" inputmode="numeric" autocomplete="tel" placeholder="90-123-45-67" aria-label="phone" required />
           <button type="submit" class="phone-field__submit" aria-label="OK">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
@@ -476,7 +481,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <img src="exports/dezsolution-logo-primary.png" alt="Дезинфекция Ташкент — DezSolution" class="footer__logo" width="137" height="34" loading="lazy" decoding="async" />
+        <img src="assets/dezsolution-logo-primary.png" alt="Дезинфекция Ташкент — DezSolution" class="footer__logo" width="137" height="34" loading="lazy" decoding="async" />
         <p class="footer__tag" data-i18n="footer.tag">Профессиональная дезинфекция по Ташкенту и области.</p>
       </div>
       <div class="footer__col">
@@ -496,10 +501,16 @@
     </div>
   </footer>
 
-  <a href="tel:+998901234567" class="mobile-call" aria-label="call">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.24 1L6.6 10.8Z" fill="currentColor"/></svg>
-    <span data-i18n="mobile.call">Позвонить</span>
-  </a>
+  <div class="mobile-bar">
+    <a href="tel:+998901234567" class="mobile-call" aria-label="call">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.24 1L6.6 10.8Z" fill="currentColor"/></svg>
+      <span data-i18n="mobile.call">Позвонить</span>
+    </a>
+    <a href="https://t.me/dezsolution" target="_blank" rel="noopener" class="mobile-tg" aria-label="Telegram">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.14-3.05-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+      <span>Telegram</span>
+    </a>
+  </div>
 
   <script src="i18n.js" defer></script>
   <script src="app.js" defer></script>

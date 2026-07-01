@@ -135,14 +135,56 @@
     if (nav) nav.classList.toggle('is-scrolled', window.scrollY > 8);
   }, { passive: true });
 
+  /* ============== MOBILE MENU (hamburger) ============== */
+  var navToggle = document.querySelector('.js-nav-toggle');
+  var navMenu = document.getElementById('nav-menu');
+  function setMenu(open) {
+    if (!nav || !navToggle) return;
+    nav.classList.toggle('is-menu-open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function () {
+      setMenu(!nav.classList.contains('is-menu-open'));
+    });
+    // menyudagi havolaga bosilganda yopiladi
+    navMenu.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setMenu(false);
+    });
+    // Esc bilan yopish
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setMenu(false);
+    });
+  }
+
   /* ============== LEAD FORMS ============== */
+  // Har qanday kiritilgan qiymatdan 9 xonali raqamni ajratib olamiz (hammasini qabul qiladi)
   function normalizePhone(raw) {
     var d = (raw || '').replace(/\D/g, '');
     if (d.indexOf('998') === 0) d = d.slice(3);
     if (d.length === 10 && d.indexOf('0') === 0) d = d.slice(1);
-    return d;
+    return d.slice(0, 9);
   }
   function isValid(n) { return /^\d{9}$/.test(n); }
+
+  /* ---- Telefon maskasi: XX-XXX-XX-XX ko'rinishida ko'rsatiladi ---- */
+  // Yakuniy format regexi: +998 90-123-45-67
+  var PHONE_RE = /^\+998 \d{2}-\d{3}-\d{2}-\d{2}$/;
+  function maskPhone(digits) {
+    var d = normalizePhone(digits);
+    var p = [d.slice(0, 2), d.slice(2, 5), d.slice(5, 7), d.slice(7, 9)];
+    return p.filter(Boolean).join('-');
+  }
+  function attachPhoneMask(input) {
+    function reformat() {
+      var masked = maskPhone(input.value);
+      if (input.value !== masked) input.value = masked;
+    }
+    input.addEventListener('input', reformat);
+    input.addEventListener('paste', function () { setTimeout(reformat, 0); });
+    reformat();
+  }
+  document.querySelectorAll('input[name="phone"]').forEach(attachPhoneMask);
 
   function setStatus(form, msg, type) {
     var el = form.querySelector('.js-status');
@@ -157,8 +199,10 @@
     var form = e.currentTarget;
     var phoneInput = form.querySelector('input[name="phone"]');
     var nine = normalizePhone(phoneInput ? phoneInput.value : '');
+    // To'liq terilganda "+998 XX-XXX-XX-XX" formatiga mos kelishi shart
+    var fullFormatted = '+998 ' + maskPhone(nine);
 
-    if (!isValid(nine)) {
+    if (!isValid(nine) || !PHONE_RE.test(fullFormatted)) {
       setStatus(form, t('form.invalid'), 'err');
       if (phoneInput) phoneInput.focus();
       form.classList.add('shake');
