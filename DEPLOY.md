@@ -1,7 +1,15 @@
-# DezSolution — Cloudflare Pages'ga bepul joylashtirish
+# DezSolution — Vercel'ga bepul joylashtirish
 
-Sayt statik fayllardan + bitta serverless funksiyadan (`functions/api/lead.js`) iborat.
-Cloudflare Pages ularni bepul, tez (global CDN) va HTTPS bilan joylashtiradi.
+Sayt statik fayllardan (root'da) + bitta serverless funksiyadan (`api/lead.js`) iborat.
+Vercel ularni bepul, tez (global CDN) va HTTPS bilan joylashtiradi.
+
+Fayl tuzilishi (muhim):
+```
+index.html, app.js, i18n.js, css/, images/, exports/, robots.txt, sitemap.xml   ← statik (root)
+api/lead.js        ← forma → Telegram (Vercel funksiyasi)
+vercel.json        ← Vercel sozlamalari
+server.js          ← faqat lokal test uchun (Vercel'da ishlatilmaydi)
+```
 
 ---
 
@@ -9,56 +17,53 @@ Cloudflare Pages ularni bepul, tez (global CDN) va HTTPS bilan joylashtiradi.
 
 Eski token kod tarixida ochilib qolgan edi. Xavfsizlik uchun **yangi token oling**:
 
-1. Telegramda [@BotFather](https://t.me/BotFather) → `/mybots` → botingiz → **API Token** → **Revoke current token**.
-2. Yangi tokenni saqlab qo'ying — uni pastda Cloudflare'ga kiritasiz.
+1. Telegram → [@BotFather](https://t.me/BotFather) → `/mybots` → botingiz → **API Token** → **Revoke current token**.
+2. Yangi tokenni saqlab qo'ying — uni pastda Vercel'ga kiritasiz (kodga YOZMANG).
 
 ---
 
-## 1-qadam: Kodni GitHub'ga yuklash
-
-1. [github.com](https://github.com) da yangi (bo'sh, **private** bo'lsa ham bo'ladi) repo oching, masalan `dezsolution`.
-2. Terminalда loyiha papkasida:
+## 1-qadam: O'zgarishlarni GitHub'ga yuklash
 
 ```bash
 cd /Users/none/Desktop/dezsolution
-git init
 git add .
-git commit -m "DezSolution sayti"
-git branch -M main
-git remote add origin https://github.com/FOYDALANUVCHI/dezsolution.git
-git push -u origin main
+git commit -m "Vercel sozlamalari: api/lead.js, vercel.json"
+git push
 ```
 
-> `.gitignore` tufayli `leads.json`, `node_modules`, `.env` yuklanmaydi.
+---
+
+## 2-qadam: Vercel loyihasini to'g'ri sozlash
+
+> CSS ishlamasligining asosiy sababi — noto'g'ri "Framework/Output" sozlamasi.
+> Quyidagini tekshiring:
+
+1. [vercel.com](https://vercel.com) → loyihangiz → **Settings** → **Build & Deployment** (yoki **General**).
+2. Sozlamalar:
+   - **Framework Preset:** `Other`
+   - **Root Directory:** `./`  (public EMAS!)
+   - **Build Command:** bo'sh (Override o'chiq)
+   - **Output Directory:** bo'sh (Override o'chiq)
+   - **Install Command:** bo'sh
+3. Saqlang.
+
+> Repoda `vercel.json` bor — u ham shu sozlamalarni majburlaydi, shuning uchun
+> statik fayllar root'dan, forma esa `/api/lead` orqali to'g'ri ishlaydi.
 
 ---
 
-## 2-qadam: Cloudflare Pages'da loyiha yaratish
+## 3-qadam: Telegram sozlamalari (Environment Variables)
 
-1. [dash.cloudflare.com](https://dash.cloudflare.com) — ro'yxatdan o'ting (bepul).
-2. Chapdan **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
-3. GitHub hisobingizni ulang va `dezsolution` repo'sini tanlang.
-4. **Build settings:**
-   - Framework preset: **None**
-   - Build command: **bo'sh qoldiring**
-   - Build output directory: **`/`** (root)
-5. **Save and Deploy** bosing.
-
-Bir necha soniyada sayt `nom.pages.dev` manzilida ochiladi.
-
----
-
-## 3-qadam: Telegram sozlamalari (ENV)
-
-1. Loyiha → **Settings** → **Environment variables** → **Production**.
-2. Ikkita o'zgaruvchi qo'shing:
+1. Loyiha → **Settings** → **Environment Variables**.
+2. Ikkita o'zgaruvchi qo'shing (**Production** va **Preview** ga belgilang):
 
 | Nomi | Qiymati |
 |------|---------|
 | `TELEGRAM_BOT_TOKEN` | @BotFather bergan **yangi** token |
 | `TELEGRAM_CHAT_ID` | `1105787891` |
 
-3. **Save** bosing va **Deployments** → oxirgi deploy → **Retry deployment** (yoki qaytadan push qiling), toki o'zgaruvchilar kuchga kirsin.
+3. **Save** → keyin **Deployments** → oxirgi deploy → **⋯** → **Redeploy**
+   (o'zgaruvchilar faqat qayta deploydan keyin kuchga kiradi).
 
 > Botingizga kamida bir marta `/start` yozgan bo'lishingiz kerak, aks holda Telegram xabar yubormaydi.
 
@@ -66,41 +71,44 @@ Bir necha soniyada sayt `nom.pages.dev` manzilida ochiladi.
 
 ## 4-qadam: O'z domeningizni ulash (dezsolution.uz)
 
-1. Loyiha → **Custom domains** → **Set up a domain** → `dezsolution.uz` kiriting.
-2. Cloudflare sizga DNS ko'rsatmalarini beradi. Ikki yo'l bor:
-   - **Eng oson:** domeningizni Cloudflare'ga qo'shing (Add a site) va registratoringizda (domenni sotib olgan joy) **nameserver**larni Cloudflare bergan qiymatlarga o'zgartiring. Keyin domen avtomatik ulanadi.
-   - Yoki registrator DNS'ida Cloudflare ko'rsatgan **CNAME** yozuvini qo'shing.
-3. HTTPS (SSL) sertifikati avtomatik, bepul beriladi (bir necha daqiqada).
+1. Loyiha → **Settings** → **Domains** → `dezsolution.uz` kiriting → **Add**.
+2. Vercel DNS yozuvlarini beradi. Domen registratoringizda (sotib olgan joyingizda) DNS'ga qo'shing:
+   - **A** yozuv: `@` → `76.76.21.21`
+   - **CNAME** yozuv: `www` → `cname.vercel-dns.com`
+   (Aniq qiymatlarni Vercel o'zi ko'rsatadi — ularni ishlating.)
+3. HTTPS (SSL) avtomatik, bepul beriladi.
 
 ---
 
 ## 5-qadam: Tekshirish
 
-1. `https://dezsolution.uz` oching — sayt ochilishi kerak.
-2. Formaga raqam kiritib yuboring — Telegramingizga xabar kelishi kerak.
-3. `https://dezsolution.uz/sitemap.xml` va `/robots.txt` ochilishini tekshiring.
-4. [Google Search Console](https://search.google.com/search-console) ga saytni qo'shing va `sitemap.xml` ni yuboring.
+1. Vercel bergan `nom.vercel.app` (yoki `dezsolution.uz`) ni oching — **CSS bilan** to'liq ochilishi kerak.
+2. Brauzerda **F12 → Network** → sahifani yangilang → `styles.css` **200** bo'lishi kerak (404 emas).
+3. Formaga raqam kiriting va yuboring — Telegramingizga xabar kelishi kerak.
+4. `/sitemap.xml` va `/robots.txt` ochilishini tekshiring.
 
 ---
 
-## Yangilanish kiritish
+## ❗ Xatolarni bartaraf etish
 
-Kodda biror narsani o'zgartirsangiz, shunchaki qaytadan push qiling — Cloudflare avtomatik yangi versiyani chiqaradi:
+### CSS yuklanmayapti (styles.css 404)
+- Vercel **Root Directory** `./` ekanini tekshiring (`public` EMAS).
+- **Output Directory** bo'sh bo'lsin (Override o'chiq).
+- `index.html`, `css/`, `app.js` fayllari **root'da** turishi kerak (subpapkada emas).
 
-```bash
-git add .
-git commit -m "o'zgarish"
-git push
-```
+### Forma "not_configured" yoki xato qaytaradi
+- `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` Environment Variables qo'yilmagan yoki
+  qo'yilgandan keyin **Redeploy** qilinmagan.
 
 ---
 
 ## Eslatma: lokal test
 
-Lokalда sinash uchun hali ham Node serveridan foydalanishingiz mumkin:
+Lokalда sinash uchun Node serveridan foydalaning:
 
 ```bash
 TELEGRAM_BOT_TOKEN=... TELEGRAM_CHAT_ID=1105787891 node server.js
 ```
 
-Cloudflare'da esa `server.js` ishlatilmaydi — uning o'rniga `functions/api/lead.js` ishlaydi. Ikkalasi bir xil vazifani bajaradi.
+Vercel'da esa `server.js` ishlatilmaydi — uning o'rniga `api/lead.js` ishlaydi.
+Ikkalasi bir xil vazifani bajaradi.
