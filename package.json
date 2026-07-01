@@ -1,13 +1,10 @@
 {
   "name": "dezsolution",
   "version": "1.0.0",
-  "description": "DezSolution — dezinfeksiya kompaniyasi uchun bir sahifali sotuv sayti (landing page) + telefon raqam oluvchi backend",
-  "main": "server.js",
+  "description": "DezSolution — dezinfeksiya kompaniyasi uchun bir sahifali sotuv sayti (landing page)",
+  "private": true,
   "scripts": {
     "start": "node server.js"
-  },
-  "engines": {
-    "node": ">=14"
   },
   "license": "MIT"
 }
