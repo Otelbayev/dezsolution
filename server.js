@@ -311,8 +311,14 @@ function checkTelegram() {
     .on("error", (e) => console.error("❌ Telegramga ulanib bo'lmadi:", e.message));
 }
 
-server.listen(PORT, () => {
-  console.log("DezSolution ishga tushdi → http://localhost:" + PORT);
-  console.log("Lead fayl:", LEADS_FILE);
-  checkTelegram();
-});
+// Faqat to'g'ridan-to'g'ri `node server.js` ishga tushirilganda tinglaymiz.
+// Vercel bu faylni import qilsa ham server.listen() chaqirilmaydi (crashdan himoya).
+if (require.main === module) {
+  server.listen(PORT, () => {
+    console.log("DezSolution ishga tushdi → http://localhost:" + PORT);
+    console.log("Lead fayl:", LEADS_FILE);
+    checkTelegram();
+  });
+}
+
+module.exports = server;
