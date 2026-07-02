@@ -3,13 +3,9 @@
   "version": "1.0.0",
   "description": "DezSolution — dezinfeksiya kompaniyasi uchun bir sahifali sotuv sayti (landing page)",
   "private": true,
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
-  },
-  "engines": {
-    "node": "22.x"
+    "start": "node dev-server.js",
+    "dev": "node dev-server.js"
   },
   "license": "MIT"
 }
