@@ -1,17 +1,7 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "api/lead.js", "use": "@vercel/node" },
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "app.js", "use": "@vercel/static" },
-    { "src": "i18n.js", "use": "@vercel/static" },
-    { "src": "css/**", "use": "@vercel/static" },
-    { "src": "assets/**", "use": "@vercel/static" },
-    { "src": "robots.txt", "use": "@vercel/static" },
-    { "src": "sitemap.xml", "use": "@vercel/static" },
-    { "src": "google899a081572b4ec91.html", "use": "@vercel/static" },
-    { "src": "yandex_040694a312eab0ca.html", "use": "@vercel/static" }
-  ],
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "echo 'static site, no build step'",
+  "outputDirectory": "public",
   "headers": [
     {
       "source": "/assets/(.*)",

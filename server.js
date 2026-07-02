@@ -32,8 +32,9 @@ function cacheControl(ext) {
 }
 
 const PORT = process.env.PORT || 3000;
-const ROOT = __dirname;
-const LEADS_FILE = path.join(ROOT, "leads.json");
+// Statik fayllar public/ ichida (Vercel outputDirectory bilan bir xil)
+const ROOT = path.join(__dirname, "public");
+const LEADS_FILE = path.join(__dirname, "leads.json");
 
 // Maxfiy ma'lumotlar faqat environment orqali (kodda saqlanmaydi!)
 // Lokal ishga tushirish:
