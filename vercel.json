@@ -9,7 +9,8 @@
     { "src": "assets/**", "use": "@vercel/static" },
     { "src": "robots.txt", "use": "@vercel/static" },
     { "src": "sitemap.xml", "use": "@vercel/static" },
-    { "src": "google899a081572b4ec91.html", "use": "@vercel/static" }
+    { "src": "google899a081572b4ec91.html", "use": "@vercel/static" },
+    { "src": "yandex_040694a312eab0ca.html", "use": "@vercel/static" }
   ],
   "headers": [
     {
