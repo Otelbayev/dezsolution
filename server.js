@@ -85,67 +85,77 @@ function appendLead(lead) {
   fs.writeFileSync(LEADS_FILE, JSON.stringify(list, null, 2), "utf8");
 }
 
+// Telegramga xabar yuboradi. Promise qaytaradi — serverless (Vercel)da
+// javob qaytarishdan oldin `await` qilish uchun, aks holda so'rov uzilib qoladi.
 function notifyTelegram(lead) {
-  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
+  return new Promise((resolve) => {
+    if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+      console.warn("⚠️  Telegram env yo'q — xabar yuborilmadi.");
+      return resolve(false);
+    }
 
-  const text =
-    "🔔 Yangi buyurtma — DezSolution\n\n" +
-    "📞 Telefon: " +
-    lead.phone +
-    "\n" +
-    (lead.name ? "👤 Ism: " + lead.name + "\n" : "") +
-    (lead.service ? "🧪 Xizmat: " + lead.service + "\n" : "") +
-    "📍 Manba: " +
-    lead.source +
-    (lead.lang ? " (" + lead.lang + ")" : "") +
-    "\n" +
-    "🕒 Vaqt: " +
-    lead.createdAt;
+    const text =
+      "🔔 Yangi buyurtma — DezSolution\n\n" +
+      "📞 Telefon: " +
+      lead.phone +
+      "\n" +
+      (lead.name ? "👤 Ism: " + lead.name + "\n" : "") +
+      (lead.service ? "🧪 Xizmat: " + lead.service + "\n" : "") +
+      "📍 Manba: " +
+      lead.source +
+      (lead.lang ? " (" + lead.lang + ")" : "") +
+      "\n" +
+      "🕒 Vaqt: " +
+      lead.createdAt;
 
-  const payload = JSON.stringify({
-    chat_id: TELEGRAM_CHAT_ID,
-    text: text,
-  });
+    const payload = JSON.stringify({
+      chat_id: TELEGRAM_CHAT_ID,
+      text: text,
+    });
 
-  const req = https.request(
-    {
-      hostname: "api.telegram.org",
-      path: "/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Content-Length": Buffer.byteLength(payload),
+    const req = https.request(
+      {
+        hostname: "api.telegram.org",
+        path: "/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(payload),
+        },
+        timeout: 10000,
       },
-      timeout: 10000,
-    },
-    (r) => {
-      let resp = "";
-      r.on("data", (c) => (resp += c));
-      r.on("end", () => {
-        try {
-          const j = JSON.parse(resp);
-          if (j.ok) {
-            console.log("📨 Telegramga yuborildi ✓");
-          } else {
-            console.error(
-              "❌ Telegram rad etdi:",
-              j.error_code,
-              j.description,
-            );
+      (r) => {
+        let resp = "";
+        r.on("data", (c) => (resp += c));
+        r.on("end", () => {
+          try {
+            const j = JSON.parse(resp);
+            if (j.ok) {
+              console.log("📨 Telegramga yuborildi ✓");
+              resolve(true);
+            } else {
+              console.error("❌ Telegram rad etdi:", j.error_code, j.description);
+              resolve(false);
+            }
+          } catch (e) {
+            console.error("❌ Telegram javobi noaniq:", resp.slice(0, 200));
+            resolve(false);
           }
-        } catch (e) {
-          console.error("❌ Telegram javobi noaniq:", resp.slice(0, 200));
-        }
-      });
-    },
-  );
-  req.on("error", (err) => console.error("❌ Telegram tarmoq xatosi:", err.message));
-  req.on("timeout", () => {
-    console.error("❌ Telegram javob bermadi (timeout)");
-    req.destroy();
+        });
+      },
+    );
+    req.on("error", (err) => {
+      console.error("❌ Telegram tarmoq xatosi:", err.message);
+      resolve(false);
+    });
+    req.on("timeout", () => {
+      console.error("❌ Telegram javob bermadi (timeout)");
+      req.destroy();
+      resolve(false);
+    });
+    req.write(payload);
+    req.end();
   });
-  req.write(payload);
-  req.end();
 }
 
 /* ---------- Statik fayllar ---------- */
@@ -221,7 +231,7 @@ const server = http.createServer((req, res) => {
         req.destroy();
       }
     });
-    req.on("end", () => {
+    req.on("end", async () => {
       if (tooBig) return sendJSON(res, 413, { ok: false, error: "too_large" });
 
       let data;
@@ -246,14 +256,16 @@ const server = http.createServer((req, res) => {
         createdAt: new Date().toISOString(),
       };
 
+      // Diskka saqlash — best-effort. Vercel'da fayl tizimi read-only,
+      // shuning uchun xato bo'lsa ham so'rovni to'xtatmaymiz (Telegram baribir ketadi).
       try {
         appendLead(lead);
       } catch (e) {
-        console.error("Saqlashda xatolik:", e.message);
-        return sendJSON(res, 500, { ok: false, error: "save_failed" });
+        console.error("Saqlashda xatolik (e'tiborsiz):", e.message);
       }
 
-      notifyTelegram(lead);
+      // Serverless'da javobdan oldin kutamiz, aks holda so'rov uzilib qoladi.
+      await notifyTelegram(lead);
       console.log("✅ Yangi lead:", lead.phone, "(" + lead.source + ")");
       return sendJSON(res, 200, { ok: true });
     });
@@ -311,14 +323,8 @@ function checkTelegram() {
     .on("error", (e) => console.error("❌ Telegramga ulanib bo'lmadi:", e.message));
 }
 
-// Faqat to'g'ridan-to'g'ri `node server.js` ishga tushirilganda tinglaymiz.
-// Vercel bu faylni import qilsa ham server.listen() chaqirilmaydi (crashdan himoya).
-if (require.main === module) {
-  server.listen(PORT, () => {
-    console.log("DezSolution ishga tushdi → http://localhost:" + PORT);
-    console.log("Lead fayl:", LEADS_FILE);
-    checkTelegram();
-  });
-}
-
-module.exports = server;
+server.listen(PORT, () => {
+  console.log("DezSolution ishga tushdi → http://localhost:" + PORT);
+  console.log("Lead fayl:", LEADS_FILE);
+  checkTelegram();
+});
