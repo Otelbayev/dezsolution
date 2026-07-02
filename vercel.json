@@ -8,7 +8,8 @@
     { "src": "css/**", "use": "@vercel/static" },
     { "src": "assets/**", "use": "@vercel/static" },
     { "src": "robots.txt", "use": "@vercel/static" },
-    { "src": "sitemap.xml", "use": "@vercel/static" }
+    { "src": "sitemap.xml", "use": "@vercel/static" },
+    { "src": "google899a081572b4ec91.html", "use": "@vercel/static" }
   ],
   "headers": [
     {
