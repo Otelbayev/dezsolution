@@ -129,11 +129,44 @@
     counters.forEach(animateCount);
   }
 
+  /* ============== HERO VIDEO — SCROLL PARALLAX ============== */
+  // Skroll paytida hero videosi sekinroq siljiydi va ozgina kattalashadi.
+  var prefersReduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var parallaxEls = prefersReduced ? [] : document.querySelectorAll('[data-parallax]');
+  var heroSection = document.querySelector('.hero');
+
   /* ============== NAV SHADOW ON SCROLL ============== */
   var nav = document.querySelector('.nav');
+
+  // Bitta rAF ichida barcha skroll effektlari (nav soyasi + parallaks)
+  var scrollTicking = false;
+  function onScroll() {
+    var y = window.scrollY || window.pageYOffset;
+    if (nav) nav.classList.toggle('is-scrolled', y > 8);
+
+    if (parallaxEls.length && heroSection) {
+      var heroH = heroSection.offsetHeight || 1;
+      // hero ko'rinishda bo'lganda parallaksni hisoblaymiz
+      if (y < heroH) {
+        var p = y / heroH;                 // 0 → 1
+        var shift = p * 60;                // px pastga
+        var scale = 1.08 + p * 0.06;       // ozgina kattalashish
+        for (var i = 0; i < parallaxEls.length; i++) {
+          parallaxEls[i].style.transform =
+            'scale(' + scale.toFixed(3) + ') translateY(' + shift.toFixed(1) + 'px)';
+        }
+      }
+    }
+    scrollTicking = false;
+  }
   window.addEventListener('scroll', function () {
-    if (nav) nav.classList.toggle('is-scrolled', window.scrollY > 8);
+    if (!scrollTicking) {
+      scrollTicking = true;
+      window.requestAnimationFrame(onScroll);
+    }
   }, { passive: true });
+  onScroll();
 
   /* ============== MOBILE MENU (hamburger) ============== */
   var navToggle = document.querySelector('.js-nav-toggle');

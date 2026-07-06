@@ -50,6 +50,8 @@ const MIME = {
   ".ico": "image/x-icon",
   ".png": "image/png",
   ".jpg": "image/jpeg",
+  ".mp4": "video/mp4",
+  ".webm": "video/webm",
   ".json": "application/json; charset=utf-8",
   ".xml": "application/xml; charset=utf-8",
   ".txt": "text/plain; charset=utf-8",

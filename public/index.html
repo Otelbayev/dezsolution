@@ -39,7 +39,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/dezsolution-icon.png" />
   <link rel="stylesheet" href="css/styles.css" />
@@ -197,6 +197,10 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero">
+    <video class="hero__video" data-parallax autoplay muted loop playsinline preload="auto"
+           poster="assets/hero-bg.jpg" aria-hidden="true">
+      <source src="assets/hero-video.mp4" type="video/mp4" />
+    </video>
     <div class="hero__clouds" aria-hidden="true"></div>
     <div class="container hero__inner">
       <div class="hero__copy reveal">
@@ -245,10 +249,10 @@
   <!-- ============ TRUST STRIP ============ -->
   <section class="trust">
     <div class="container trust__inner">
-      <div class="stat reveal"><span class="stat__num" data-count="7400" data-suffix="+">0</span><span class="stat__label" data-i18n="trust.orders">Выполненных заказов</span></div>
-      <div class="stat reveal"><span class="stat__num" data-count="60" data-suffix=" мин" data-suffix-uz=" daq">0</span><span class="stat__label" data-i18n="trust.time">Среднее время приезда</span></div>
-      <div class="stat reveal"><span class="stat__num" data-count="1" data-suffix=" год" data-suffix-uz=" yil">0</span><span class="stat__label" data-i18n="trust.guarantee">Гарантия на услугу</span></div>
-      <div class="stat reveal"><span class="stat__num">4.9 / 5</span><span class="stat__label" data-i18n="trust.rating">Оценка клиентов</span></div>
+      <div class="stat reveal reveal--scale"><span class="stat__num" data-count="7400" data-suffix="+">0</span><span class="stat__label" data-i18n="trust.orders">Выполненных заказов</span></div>
+      <div class="stat reveal reveal--scale"><span class="stat__num" data-count="60" data-suffix=" мин" data-suffix-uz=" daq">0</span><span class="stat__label" data-i18n="trust.time">Среднее время приезда</span></div>
+      <div class="stat reveal reveal--scale"><span class="stat__num" data-count="1" data-suffix=" год" data-suffix-uz=" yil">0</span><span class="stat__label" data-i18n="trust.guarantee">Гарантия на услугу</span></div>
+      <div class="stat reveal reveal--scale"><span class="stat__num">4.9 / 5</span><span class="stat__label" data-i18n="trust.rating">Оценка клиентов</span></div>
     </div>
   </section>
 
@@ -262,22 +266,22 @@
       </div>
 
       <div class="grid grid--services">
-        <article class="service-card reveal">
+        <article class="service-card reveal reveal--scale">
           <img src="assets/service-insects.svg" alt="" class="service-card__icon" width="64" height="64" loading="lazy" decoding="async" />
           <h3 class="service-card__title" data-i18n="services.s1.t">Дезинсекция</h3>
           <p class="service-card__text" data-i18n="services.s1.d">Полное уничтожение тараканов, муравьёв, клопов, блох и других насекомых.</p>
         </article>
-        <article class="service-card reveal">
+        <article class="service-card reveal reveal--scale">
           <img src="assets/service-rodents.svg" alt="" class="service-card__icon" width="64" height="64" loading="lazy" decoding="async" />
           <h3 class="service-card__title" data-i18n="services.s2.t">Дератизация</h3>
           <p class="service-card__text" data-i18n="services.s2.d">Безопасные и эффективные методы борьбы с крысами и мышами.</p>
         </article>
-        <article class="service-card reveal">
+        <article class="service-card reveal reveal--scale">
           <img src="assets/service-disinfect.svg" alt="" class="service-card__icon" width="64" height="64" loading="lazy" decoding="async" />
           <h3 class="service-card__title" data-i18n="services.s3.t">Дезинфекция</h3>
           <p class="service-card__text" data-i18n="services.s3.d">Полная санитарная обработка от вирусов, бактерий и грибка.</p>
         </article>
-        <article class="service-card reveal">
+        <article class="service-card reveal reveal--scale">
           <img src="assets/service-fumigation.svg" alt="" class="service-card__icon" width="64" height="64" loading="lazy" decoding="async" />
           <h3 class="service-card__title" data-i18n="services.s4.t">Фумигация</h3>
           <p class="service-card__text" data-i18n="services.s4.d">Газовая обработка складов и зерновой продукции для защиты.</p>
@@ -297,22 +301,22 @@
         <h2 class="section__title section__title--left reveal" data-i18n="why.title">Чтобы вы выбрали с уверенностью</h2>
 
         <div class="grid grid--features">
-          <article class="feature-card reveal">
+          <article class="feature-card reveal reveal--scale">
             <p class="feature-card__eyebrow" data-i18n="why.f1.k">Безопасность</p>
             <h3 class="feature-card__title" data-i18n="why.f1.t">Безвредно для детей и питомцев</h3>
             <p class="feature-card__text" data-i18n="why.f1.d">Работаем сертифицированными препаратами, разрешёнными Минздравом.</p>
           </article>
-          <article class="feature-card reveal">
+          <article class="feature-card reveal reveal--scale">
             <p class="feature-card__eyebrow" data-i18n="why.f2.k">Скорость</p>
             <h3 class="feature-card__title" data-i18n="why.f2.t">Приезжаем за 60 минут</h3>
             <p class="feature-card__text" data-i18n="why.f2.d">Быстрая бригада по городу. Принимаем и срочные вызовы.</p>
           </article>
-          <article class="feature-card reveal">
+          <article class="feature-card reveal reveal--scale">
             <p class="feature-card__eyebrow" data-i18n="why.f3.k">Гарантия</p>
             <h3 class="feature-card__title" data-i18n="why.f3.t">Письменная гарантия 1 год</h3>
             <p class="feature-card__text" data-i18n="why.f3.d">Если вредитель вернётся — обработаем повторно бесплатно.</p>
           </article>
-          <article class="feature-card reveal">
+          <article class="feature-card reveal reveal--scale">
             <p class="feature-card__eyebrow" data-i18n="why.f4.k">Опыт</p>
             <h3 class="feature-card__title" data-i18n="why.f4.t">Более 7 лет опыта</h3>
             <p class="feature-card__text" data-i18n="why.f4.d">Обслужили 7 400+ объектов: дома, рестораны, больницы, склады.</p>
@@ -381,10 +385,10 @@
       </div>
 
       <div class="grid grid--steps">
-        <div class="step reveal"><span class="step__num">01</span><h3 class="step__title" data-i18n="process.p1.t">Оставляете заявку</h3><p class="step__text" data-i18n="process.p1.d">Вы оставляете номер — мы звоним.</p></div>
-        <div class="step reveal"><span class="step__num">02</span><h3 class="step__title" data-i18n="process.p2.t">Оценка</h3><p class="step__text" data-i18n="process.p2.d">Осматриваем объект и называем точную цену.</p></div>
-        <div class="step reveal"><span class="step__num">03</span><h3 class="step__title" data-i18n="process.p3.t">Обработка</h3><p class="step__text" data-i18n="process.p3.d">Проводим полную обработку современным оборудованием.</p></div>
-        <div class="step reveal"><span class="step__num">04</span><h3 class="step__title" data-i18n="process.p4.t">Гарантия</h3><p class="step__text" data-i18n="process.p4.d">Даём письменную гарантию и контролируем результат.</p></div>
+        <div class="step reveal reveal--scale"><span class="step__num">01</span><h3 class="step__title" data-i18n="process.p1.t">Оставляете заявку</h3><p class="step__text" data-i18n="process.p1.d">Вы оставляете номер — мы звоним.</p></div>
+        <div class="step reveal reveal--scale"><span class="step__num">02</span><h3 class="step__title" data-i18n="process.p2.t">Оценка</h3><p class="step__text" data-i18n="process.p2.d">Осматриваем объект и называем точную цену.</p></div>
+        <div class="step reveal reveal--scale"><span class="step__num">03</span><h3 class="step__title" data-i18n="process.p3.t">Обработка</h3><p class="step__text" data-i18n="process.p3.d">Проводим полную обработку современным оборудованием.</p></div>
+        <div class="step reveal reveal--scale"><span class="step__num">04</span><h3 class="step__title" data-i18n="process.p4.t">Гарантия</h3><p class="step__text" data-i18n="process.p4.d">Даём письменную гарантию и контролируем результат.</p></div>
       </div>
     </div>
   </section>
@@ -398,17 +402,17 @@
       </div>
 
       <div class="grid grid--reviews">
-        <article class="review-card reveal">
+        <article class="review-card reveal reveal--scale">
           <p class="review-card__stars">★★★★★</p>
           <p class="review-card__text" data-i18n="reviews.r1.t">«В ресторане были тараканы. Обработали один раз — уже несколько месяцев ни одного. Спасибо!»</p>
           <div class="review-card__author"><img src="assets/avatar1.svg" alt="" width="40" height="40" loading="lazy" decoding="async" /><span data-i18n="reviews.r1.a">Дилноза — Чиланзар, кафе</span></div>
         </article>
-        <article class="review-card reveal">
+        <article class="review-card reveal reveal--scale">
           <p class="review-card__stars">★★★★★</p>
           <p class="review-card__text" data-i18n="reviews.r2.t">«Приехали быстро, запаха нет. За детей не переживала. И цена приятная.»</p>
           <div class="review-card__author"><img src="assets/avatar2.svg" alt="" width="40" height="40" loading="lazy" decoding="async" /><span data-i18n="reviews.r2.a">Сардор — Юнусабад</span></div>
         </article>
-        <article class="review-card reveal">
+        <article class="review-card reveal reveal--scale">
           <p class="review-card__stars">★★★★★</p>
           <p class="review-card__text" data-i18n="reviews.r3.t">«Избавились от крыс на складе. Профессиональный подход, дали гарантию. Рекомендую.»</p>
           <div class="review-card__author"><img src="assets/avatar3.svg" alt="" width="40" height="40" loading="lazy" decoding="async" /><span data-i18n="reviews.r3.a">Жамшид — Сергели, склад</span></div>
@@ -472,25 +476,25 @@
   <!-- ============ SEO TEXT ============ -->
   <section class="seo-block">
     <div class="container">
-      <h2 class="seo-block__title" data-i18n="seo.title">Дезинфекция в Ташкенте — служба DezSolution</h2>
-      <p class="seo-block__text" data-i18n="seo.p1">DezSolution — профессиональная служба дезинфекции, дезинсекции и дератизации в Ташкенте и Ташкентской области. Мы уничтожаем тараканов, клопов, муравьёв, блох, клещей, комаров, а также крыс и мышей. Обработка проводится современными препаратами без резкого запаха, безопасными для детей и домашних животных.</p>
-      <p class="seo-block__text" data-i18n="seo.p2">Заказать дезинфекцию квартиры, дома, офиса, ресторана, кафе или склада можно в любой день с 08:00 до 22:00, а срочные вызовы принимаются круглосуточно. Наши специалисты выезжают в течение 60 минут, называют точную цену без скрытых платежей и дают письменную гарантию на 1 год. Оставьте номер телефона — и мы поможем избавиться от насекомых и грызунов быстро и надёжно.</p>
+      <h2 class="seo-block__title reveal" data-i18n="seo.title">Дезинфекция в Ташкенте — служба DezSolution</h2>
+      <p class="seo-block__text reveal" data-i18n="seo.p1">DezSolution — профессиональная служба дезинфекции, дезинсекции и дератизации в Ташкенте и Ташкентской области. Мы уничтожаем тараканов, клопов, муравьёв, блох, клещей, комаров, а также крыс и мышей. Обработка проводится современными препаратами без резкого запаха, безопасными для детей и домашних животных.</p>
+      <p class="seo-block__text reveal" data-i18n="seo.p2">Заказать дезинфекцию квартиры, дома, офиса, ресторана, кафе или склада можно в любой день с 08:00 до 22:00, а срочные вызовы принимаются круглосуточно. Наши специалисты выезжают в течение 60 минут, называют точную цену без скрытых платежей и дают письменную гарантию на 1 год. Оставьте номер телефона — и мы поможем избавиться от насекомых и грызунов быстро и надёжно.</p>
     </div>
   </section>
 
   <footer class="footer">
     <div class="container footer__inner">
-      <div class="footer__brand">
+      <div class="footer__brand reveal">
         <img src="assets/dezsolution-logo-primary.png" alt="Дезинфекция Ташкент — DezSolution" class="footer__logo" width="137" height="34" loading="lazy" decoding="async" />
         <p class="footer__tag" data-i18n="footer.tag">Профессиональная дезинфекция по Ташкенту и области.</p>
       </div>
-      <div class="footer__col">
+      <div class="footer__col reveal">
         <h4 data-i18n="footer.contact">Контакты</h4>
         <a href="tel:+998901234567">+998 90 123 45 67</a>
         <a href="https://t.me/dezsolution" target="_blank" rel="noopener">Telegram</a>
         <a href="mailto:info@dezsolution.uz">info@dezsolution.uz</a>
       </div>
-      <div class="footer__col">
+      <div class="footer__col reveal">
         <h4 data-i18n="footer.hours">Часы работы</h4>
         <p data-i18n="footer.h1">Ежедневно: 08:00 – 22:00</p>
         <p data-i18n="footer.h2">Срочно: 24/7</p>
